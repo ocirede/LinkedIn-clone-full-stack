@@ -1,8 +1,8 @@
-import { dbName, port, uri } from "./lib/env-vars.js";
+import { port} from "./lib/env-vars.js";
 import express from "express";
 import connectDB from "./lib/mongodb.js";
 import "dotenv/config";
-import postRoutes from "./routes/postRoutes.js";
+
 import cors from "cors";
 import userRoutes from "./routes/userRoute.js";
 
