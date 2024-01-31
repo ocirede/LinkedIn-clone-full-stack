@@ -14,7 +14,6 @@ const Posts = () => {
   } = useContext(PostContext);
   const [commentText, setCommentText] = useState("");
   const [showCommentInput, setShowCommentInput] = useState({});
-  const [postComments, setPostComments] = useState([]);
 
   useEffect(() => {
     if (allPosts) {
