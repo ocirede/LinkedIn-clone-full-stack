@@ -15,9 +15,11 @@ function App() {
 
         <UserContextProvider>
           <PostContextProvider>
+            <div className="mb-10">
    <Navbar/>
+   </div>
             <Routes>
-              <Route path="/home" element={<Home />} />
+              {/* <Route path="/home" element={<Home />} /> */}
                 <Route path="/home" element={<HomePage />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/" element={<SignUp />} />
