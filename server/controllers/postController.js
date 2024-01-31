@@ -29,9 +29,9 @@ export const handleLike = async (req, res) => {
     const isLiked = post.likes.includes(userId);
 
     if (isLiked) {
-      post.likes = post.likes.filter((id) => id.toString() !== authorId);
+      post.likes = post.likes.filter((id) => id.toString() !== userId);
     } else {
-      post.likes.push(authorId);
+      post.likes.push(userId);
     }
 
     await post.save();
