@@ -1,6 +1,6 @@
-import { port} from "./lib/env-vars.js";
+import { port } from './lib/env.vars.js'
 import express from "express";
-import connectDB from "./lib/mongodb.js";
+import connectDB from "./lib/connectDB.js";
 import "dotenv/config";
 
 import cors from "cors";
