@@ -6,11 +6,11 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signup } = useContext(UserContext);
+  const { signUp } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(username, email, password);
+    signUp(username, email, password);
     console.log(
       "Sign up inputs==>>",
 

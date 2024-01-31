@@ -5,11 +5,11 @@ import { UserContext } from "../context/userContext";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signin } = useContext(UserContext);
+  const { signIn } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signin(email, password);
+    signIn(email, password);
     console.log("Sign in inputs==>>", "Email:", email, "Password:", password);
   };
 
