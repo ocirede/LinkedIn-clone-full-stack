@@ -1,8 +1,6 @@
 import express from "express";
-import { } from "../Controllers/authController.js";
-import { fetchLoggedUser, handleRegister, handleSignIn } from "../controllers/authController.js";
+import { fetchLoggedUser, handleRegister, handleSignIn } from "../controllers/authControllers.js";
 import auth from "../middlewares/userAuth.js";
-
 const userRoutes = express.Router();
 
 userRoutes.post("/register", handleRegister )
