@@ -6,7 +6,7 @@ const postRoutes = express.Router();
 
 postRoutes.post("/add", upload.single("post-image"), addPost)
 postRoutes.get("/get", getAll);
-postRoutes.put("/like/:postId/:authorId", handleLike);
+postRoutes.put("/like/:postId/:userId", handleLike);
 postRoutes.delete("/delete/:postId", handleDelete)
 
 export default postRoutes;
