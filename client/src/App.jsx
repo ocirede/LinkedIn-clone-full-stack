@@ -1,4 +1,4 @@
-
+import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -12,11 +12,13 @@ function App() {
     <>
       <BrowserRouter>
 
+
         <UserContextProvider>
           <PostContextProvider>
    <Navbar/>
             <Routes>
               <Route path="/home" element={<Home />} />
+                <Route path="/home" element={<HomePage />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/" element={<SignUp />} />
             </Routes>
@@ -27,3 +29,4 @@ function App() {
   );
   }
 export default App;
+
