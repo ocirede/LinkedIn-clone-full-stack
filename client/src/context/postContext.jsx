@@ -16,21 +16,13 @@ const PostContextProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const createPost = async (
-    title,
-    content,
-    priority,
-    completed,
-    selectedUser
-  ) => {
+  const createPost = async (title, content) => {
     try {
-      const response = await axios.post(baseURL + `/posts/createpost`, {
+      const response = await axios.post(baseURL + `/posts/add`, {
         title,
         content,
-        priority,
-        completed,
-        selectedUser,
         author: user._id,
+        likes: [],
       });
 
       navigate("/home");
@@ -41,17 +33,6 @@ const PostContextProvider = ({ children }) => {
     }
   };
 
-  const deletePost = async (postId) => {
-    try {
-      const response = await axios.delete(
-        baseURL + `/todos/deletetodo/${postId}`
-      );
-      console.log("Post deleted:", response.data.post);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const editPost = async (postId, updatedData) => {
     try {
       const response = await axios.put(
@@ -59,7 +40,7 @@ const PostContextProvider = ({ children }) => {
         updatedData
       );
 
-      if (response.data.success) {
+      if (response.data) {
         setUpdatedPost(response.data.todo);
 
         navigate("/home");
@@ -67,6 +48,35 @@ const PostContextProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error editing the post", error);
+    }
+  };
+
+  const deletePost = async (postId) => {
+    try {
+      const response = await axios.delete(baseURL + `/posts/delete/${postId}`);
+      console.log("Post deleted:", response.data.post);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLike = async (postId, authorId) => {
+    try {
+      const response = await axios.put(
+        `${baseURL}/posts/${postId}/${authorId}`
+      );
+
+      const likedPost = response.data.post;
+
+      likedPost.likes.push(authorId);
+
+      console.log("Liked Post:", likedPost);
+
+      setAllPosts((prevPosts) =>
+        prevPosts.map((post) => (post._id === likedPost._id ? likedPost : post))
+      );
+    } catch (error) {
+      console.error("Error liking the post", error);
     }
   };
 
@@ -86,9 +96,9 @@ const PostContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        //const response = await axios.get(baseURL + `/todos/fetchtodos`);
-        // setAllTasks(response.data.posts);
-        // console.log("fetch all posts context", response.data.posts);
+        //const response = await axios.get(baseURL + `/posts/get`);
+        // setAllPosts(response.data.posts);
+        // console.log("fetch all posts context:", response.data.posts);
       } catch (error) {
         console.error("Error fetching the posts", error);
       }
@@ -100,6 +110,8 @@ const PostContextProvider = ({ children }) => {
   return (
     <PostContext.Provider
       value={{
+        allPosts,
+        handleLike,
         createPost,
         deletePost,
         editPost,

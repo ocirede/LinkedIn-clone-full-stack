@@ -48,6 +48,11 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.replace("/");
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -56,7 +61,7 @@ const UserContextProvider = ({ children }) => {
         try {
           const response = await axios.get(baseURL + `/users/loggeduser`);
           setUser(response.data);
-          console.log("Fetched user:", response.data);
+          //console.log("Fetched user:", response.data);
         } catch (error) {
           console.error(error);
           localStorage.removeItem("token");
@@ -69,7 +74,7 @@ const UserContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, signUp, signIn }}>
+    <UserContext.Provider value={{ user, signUp, signIn, logout }}>
       {children}
     </UserContext.Provider>
   );
