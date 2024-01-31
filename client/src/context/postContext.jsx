@@ -9,6 +9,7 @@ export const PostContext = createContext();
 
 const PostContextProvider = ({ children }) => {
   const [allPosts, setAllPosts] = useState();
+  const [comments, setAllComments] = useState();
 
   const { user } = useContext(UserContext);
 
@@ -80,8 +81,8 @@ const PostContextProvider = ({ children }) => {
         baseURL + `/comments/add/${postId}/${userId}`,
         {
           content,
-          author: user._id,
-          post: post._id,
+          author: userId,
+          post: postId,
         }
       );
 
@@ -93,29 +94,29 @@ const PostContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const response = await axios.get(baseURL + `/comments/get${postId}`);
-        setAllTasks(response.data);
+  const fetchComments = async (postId) => {
+    try {
+      const response = await axios.get(baseURL + `/comments/get/${postId}`);
+      setAllComments(response.data);
 
-        console.log("fetch all comments", response.data);
-      } catch (error) {
-        console.error("Error fetching the todos", error);
-      }
-    };
+      console.log("fetch all comments", response.data);
+    } catch (error) {
+      console.error("Error fetching the comments", error);
+    }
+  };
 
-    //fetchComments();
-  }, []);
+  //fetchComments();
 
   return (
     <PostContext.Provider
       value={{
         allPosts,
+        comments,
         handleLike,
         createPost,
         deletePost,
         createComment,
+        fetchComments,
       }}
     >
       {children}
