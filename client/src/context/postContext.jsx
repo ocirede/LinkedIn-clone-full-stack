@@ -9,28 +9,18 @@ export const PostContext = createContext();
 
 const PostContextProvider = ({ children }) => {
   const [allPosts, setAllPosts] = useState();
-  const [updatedPost, setUpdatedPost] = useState();
-  const [selectedPost, setSelectedPost] = useState();
 
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  const createPost = async (
-    title,
-    content,
-    priority,
-    completed,
-    selectedUser
-  ) => {
+  const createPost = async (title, content) => {
     try {
-      const response = await axios.post(baseURL + `/posts/createpost`, {
+      const response = await axios.post(baseURL + `/posts/add`, {
         title,
         content,
-        priority,
-        completed,
-        selectedUser,
         author: user._id,
+        likes: [],
       });
 
       navigate("/home");
@@ -43,67 +33,73 @@ const PostContextProvider = ({ children }) => {
 
   const deletePost = async (postId) => {
     try {
-      const response = await axios.delete(
-        baseURL + `/todos/deletetodo/${postId}`
-      );
-      console.log("Post deleted:", response.data.post);
+      const response = await axios.delete(baseURL + `/posts/delete/${postId}`);
+      console.log("Post deleted:", response.data.message);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const editPost = async (postId, updatedData) => {
+  const handleLike = async (postId, userId) => {
     try {
       const response = await axios.put(
-        baseURL + `/posts/editpost/${postId}`,
-        updatedData
+        `${baseURL}  /posts/${postId}/${userId} `
       );
 
-      if (response.data.success) {
-        setUpdatedPost(response.data.todo);
+      const likedPost = response.data;
 
-        navigate("/home");
-        console.log("Post updated successfully!", response.data.post);
-      }
+      likedPost.likes.push(userId);
+
+      console.log("Liked Post:", likedPost);
+
+      setAllPosts((prevPosts) =>
+        prevPosts.map((post) => (post._id === likedPost._id ? likedPost : post))
+      );
     } catch (error) {
-      console.error("Error editing the post", error);
+      console.error("Error liking the post", error);
     }
   };
 
-  const findPost = async (postId) => {
+  const handleLike1 = async (postId, userId) => {
     try {
-      const response = await axios.get(baseURL + `/posts/${postId}`);
-
-      if (response.data.success) {
-        setSelectedPost(response.data.todo);
-        console.log("Post found successfully!", response.data.todo);
-      }
+      const response = await axios.put(
+        `${baseURL}  /posts/${postId}/${userId} `
+      );
+      console.log(response.data);
+      const newPosts = allPosts.map((post) => {
+        if (post._id === postId) {
+          return data;
+        } else {
+          return post;
+        }
+      });
+      setAllPosts(newPosts);
     } catch (error) {
-      console.error("Error finding the post", error);
+      console.error("Error liking the post", error);
     }
   };
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        //const response = await axios.get(baseURL + `/todos/fetchtodos`);
-        // setAllTasks(response.data.posts);
-        // console.log("fetch all posts context", response.data.posts);
+        const response = await axios.get(baseURL + `/posts/get`);
+        setAllPosts(response.data);
+        console.log("fetch all posts context:", response.data);
       } catch (error) {
         console.error("Error fetching the posts", error);
       }
     };
 
     fetchPosts();
-  }, [setUpdatedPost]);
+  }, [createPost, handleLike, deletePost]);
 
   return (
     <PostContext.Provider
       value={{
+        allPosts,
+        handleLike,
         createPost,
         deletePost,
-        editPost,
-        findPost,
       }}
     >
       {children}
