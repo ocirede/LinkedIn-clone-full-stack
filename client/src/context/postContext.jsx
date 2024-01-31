@@ -115,6 +115,7 @@ const PostContextProvider = ({ children }) => {
         handleLike,
         createPost,
         deletePost,
+        createComment,
       }}
     >
       {children}
