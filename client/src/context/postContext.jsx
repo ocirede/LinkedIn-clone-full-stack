@@ -34,7 +34,7 @@ const PostContextProvider = ({ children }) => {
   const deletePost = async (postId) => {
     try {
       const response = await axios.delete(baseURL + `/posts/delete/${postId}`);
-      console.log("Post deleted:", response.data.post);
+      console.log("Post deleted:", response.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +46,7 @@ const PostContextProvider = ({ children }) => {
         `${baseURL}  /posts/${postId}/${userId} `
       );
 
-      const likedPost = response.data.post;
+      const likedPost = response.data;
 
       likedPost.likes.push(userId);
 
@@ -83,8 +83,8 @@ const PostContextProvider = ({ children }) => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(baseURL + `/posts/get`);
-        setAllPosts(response.data.posts);
-        console.log("fetch all posts context:", response.data.posts);
+        setAllPosts(response.data);
+        console.log("fetch all posts context:", response.data);
       } catch (error) {
         console.error("Error fetching the posts", error);
       }
