@@ -20,10 +20,9 @@ const PostContextProvider = ({ children }) => {
         title,
         content,
         author: user._id,
-        likes: [],
       });
 
-      navigate("/home");
+      window.location.replace("/home");
 
       console.log("New Post:", response.data);
     } catch (error) {
@@ -34,6 +33,7 @@ const PostContextProvider = ({ children }) => {
   const deletePost = async (postId) => {
     try {
       const response = await axios.delete(baseURL + `/posts/delete/${postId}`);
+      window.location.replace("/home");
       console.log("Post deleted:", response.data.message);
     } catch (error) {
       console.log(error);
@@ -43,32 +43,12 @@ const PostContextProvider = ({ children }) => {
   const handleLike = async (postId, userId) => {
     try {
       const response = await axios.put(
-        `${baseURL}  /posts/${postId}/${userId} `
-      );
-
-      const likedPost = response.data;
-
-      likedPost.likes.push(userId);
-
-      console.log("Liked Post:", likedPost);
-
-      setAllPosts((prevPosts) =>
-        prevPosts.map((post) => (post._id === likedPost._id ? likedPost : post))
-      );
-    } catch (error) {
-      console.error("Error liking the post", error);
-    }
-  };
-
-  const handleLike1 = async (postId, userId) => {
-    try {
-      const response = await axios.put(
-        `${baseURL}  /posts/${postId}/${userId} `
+        baseURL + `/posts/like/${postId}/${userId} `
       );
       console.log(response.data);
       const newPosts = allPosts.map((post) => {
         if (post._id === postId) {
-          return data;
+          return response.data;
         } else {
           return post;
         }
@@ -83,6 +63,7 @@ const PostContextProvider = ({ children }) => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(baseURL + `/posts/get`);
+
         setAllPosts(response.data);
         console.log("fetch all posts context:", response.data);
       } catch (error) {
@@ -91,7 +72,41 @@ const PostContextProvider = ({ children }) => {
     };
 
     fetchPosts();
-  }, [createPost, handleLike, deletePost]);
+  }, []);
+
+  const createComment = async (content, postId, userId) => {
+    try {
+      const response = await axios.post(
+        baseURL + `/comments/add/${postId}/${userId}`,
+        {
+          content,
+          author: user._id,
+          post: post._id,
+        }
+      );
+
+      window.location.replace("/home");
+
+      console.log("New Comment:", response.data);
+    } catch (error) {
+      console.error("Error creating new Comment:", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(baseURL + `/comments/get${postId}`);
+        setAllTasks(response.data);
+
+        console.log("fetch all comments", response.data);
+      } catch (error) {
+        console.error("Error fetching the todos", error);
+      }
+    };
+
+    //fetchComments();
+  }, []);
 
   return (
     <PostContext.Provider

@@ -72,8 +72,15 @@ const Home = () => {
                     Like ({post.likes.length})
                   </button>
                   <button
-                    onClick={deletePost(post._id)}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    onClick={() => {
+                      deletePost(post._id);
+                    }}
+                    className={`bg-red-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
+                      user._id !== post.author._id
+                        ? "cursor-not-allowed bg-gray-300"
+                        : ""
+                    }`}
+                    disabled={user._id !== post.author._id}
                   >
                     Delete
                   </button>
