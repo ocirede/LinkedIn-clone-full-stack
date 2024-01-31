@@ -10,3 +10,4 @@ userRoutes.post("/signin",   handleSignIn );
 userRoutes.get("/loggeduser", auth, fetchLoggedUser)
 
 export default userRoutes;
+

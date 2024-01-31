@@ -44,3 +44,7 @@ export const fetchLoggedUser = async (req, res) => {
     console.log(error);
   }
 };
+ 
+   
+  }
+  
