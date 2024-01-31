@@ -5,7 +5,8 @@ import { PostContext } from "../context/postContext";
 
 const Home = () => {
   const { user } = useContext(UserContext);
-  const { allPosts, handleLike, createPost } = useContext(PostContext);
+  const { allPosts, handleLike, createPost, deletePost } =
+    useContext(PostContext);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -63,12 +64,20 @@ const Home = () => {
               <div key={post._id} className="mb-4 p-4 bg-white rounded shadow">
                 <h3 className="text-lg font-semibold">{post.title}</h3>
                 <p>{post.content}</p>
-                <button
-                  onClick={handleLike(post._id, author._id)}
-                  className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Like ({post.likes.length})
-                </button>
+                <div className="mt-2 flex justify-between">
+                  <button
+                    onClick={() => handleLike(post._id, user._id)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Like ({post.likes.length})
+                  </button>
+                  <button
+                    onClick={deletePost(post._id)}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>

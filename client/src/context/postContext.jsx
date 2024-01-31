@@ -66,7 +66,7 @@ const PostContextProvider = ({ children }) => {
         `${baseURL}  /posts/${postId}/${userId} `
       );
       console.log(response.data);
-      const newPosts = posts.map((post) => {
+      const newPosts = allPosts.map((post) => {
         if (post._id === postId) {
           return data;
         } else {
@@ -91,7 +91,7 @@ const PostContextProvider = ({ children }) => {
     };
 
     fetchPosts();
-  }, [createPost, handleLike]);
+  }, [createPost, handleLike, deletePost]);
 
   return (
     <PostContext.Provider
