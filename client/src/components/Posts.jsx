@@ -14,15 +14,17 @@ const Posts = () => {
   } = useContext(PostContext);
   const [commentText, setCommentText] = useState("");
   const [showCommentInput, setShowCommentInput] = useState({});
+  const [postComments, setPostComments] = useState([]);
 
   useEffect(() => {
     if (allPosts) {
       allPosts.forEach((post) => {
         fetchComments(post._id);
-        console.log("trying to fetch comments", comments);
       });
     }
   }, [user, setCommentText]);
+
+  console.log("comments", comments);
 
   const handleToggleCommentInput = (postId) => {
     setShowCommentInput((prev) => ({
