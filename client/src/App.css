@@ -6,7 +6,7 @@
   #root {
     width: 100%;
     min-height: 100vh;
-    background: #F4F2EE;
+    /* background: #F4F2EE; */
   }
 
 @tailwind base;

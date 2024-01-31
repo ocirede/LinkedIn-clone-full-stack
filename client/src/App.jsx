@@ -15,7 +15,7 @@ function App() {
 
         <UserContextProvider>
           <PostContextProvider>
-            <div className="mb-10">
+            <div className="mb-14">
    <Navbar/>
    </div>
             <Routes>
