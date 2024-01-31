@@ -1,12 +1,28 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/userContext";
 import { PostContext } from "../context/postContext";
 
 const Posts = () => {
   const { user } = useContext(UserContext);
-  const { allPosts, handleLike, deletePost } = useContext(PostContext);
+  const {
+    allPosts,
+    handleLike,
+    deletePost,
+    createComment,
+    fetchComments,
+    comments,
+  } = useContext(PostContext);
   const [commentText, setCommentText] = useState("");
   const [showCommentInput, setShowCommentInput] = useState({});
+
+  useEffect(() => {
+    if (allPosts) {
+      allPosts.forEach((post) => {
+        fetchComments(post._id);
+        console.log("trying to fetch comments", comments);
+      });
+    }
+  }, [user, setCommentText]);
 
   const handleToggleCommentInput = (postId) => {
     setShowCommentInput((prev) => ({
@@ -16,6 +32,7 @@ const Posts = () => {
   };
 
   const handleCommentSubmit = async (postId, userId) => {
+    createComment(commentText, postId, userId);
     console.log("Comment submit:", postId, userId, commentText);
     handleToggleCommentInput(postId);
     setCommentText("");
@@ -76,7 +93,7 @@ const Posts = () => {
                   </div>
                 )}
                 {/* Render comments */}
-                {post.comments?.map((comment, index) => (
+                {comments?.map((comment, index) => (
                   <div key={index} className="mt-4 bg-gray-200 p-2 rounded">
                     <p className="text-gray-700">{comment}</p>
                   </div>
