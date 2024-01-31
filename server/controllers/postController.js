@@ -24,7 +24,7 @@ export const getAll = async (req, res) => {
 export const handleLike = async (req, res) => {
   try {
     const { postId, userId } = req.params;
-    console.log("params",req.params)
+    console.log("params", req.params);
     const post = await Post.findById(postId);
     const isLiked = post.likes.includes(userId);
 

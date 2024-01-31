@@ -12,6 +12,8 @@ const auth = (req, res, next) => {
   }
 };
 
-export default auth
+
+export default auth;
+
 
 

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const postSchema = mongoose.Schema({
   title: {
     type: String,
@@ -15,18 +16,18 @@ const postSchema = mongoose.Schema({
     ref: "User",
   },
 
-  
-  likes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+  },
 
-
-}, {
+  {
     timestamps: true,
-});
+  }
+);
 
 const Post = mongoose.model("post", postSchema);
 
