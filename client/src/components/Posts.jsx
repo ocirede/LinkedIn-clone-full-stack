@@ -19,10 +19,11 @@ const Posts = () => {
     if (allPosts) {
       allPosts.forEach((post) => {
         fetchComments(post._id);
-        console.log("trying to fetch comments", comments);
       });
     }
   }, [user, setCommentText]);
+
+  console.log("comments", comments);
 
   const handleToggleCommentInput = (postId) => {
     setShowCommentInput((prev) => ({
