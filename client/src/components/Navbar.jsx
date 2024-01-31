@@ -3,7 +3,7 @@ import {
   Bell,
   Briefcase,
   Home,
-  //Linkedin,
+  
   MessageCircleMore,
   Network,
   Search,
@@ -20,7 +20,7 @@ const Navbar = () => {
               className="h-10 w-10 object-contain"
             ></img>
           </div>
-          <div className="flex-grow flex-shrink-0 md:flex md:items-center md:w-auto ml-2">
+          <div className="flex-grow flex-shrink-0 md:flex md:items-center md:w-auto ml-2 md:ml-50">
             <div className="relative mx-auto text-gray-600">
               <input
                 className="border-2 border-gray-300 bg-#EDF3F8 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
@@ -37,8 +37,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex md:items-center md:space-x-4">
+          <div className="hidden md:flex md:items-center md:space-x-9">
             <div className="flex flex-col items-center">
               <Home className="h-6 w-6 text-gray-600" />
               <a href="#" className="text-gray-900 hover:text-gray-500">
