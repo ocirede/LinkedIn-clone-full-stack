@@ -95,7 +95,7 @@ const Posts = () => {
                 {/* Render comments */}
                 {comments?.map((comment, index) => (
                   <div key={index} className="mt-4 bg-gray-200 p-2 rounded">
-                    <p className="text-gray-700">{comment}</p>
+                    <p className="text-gray-700">{comment.content}</p>
                   </div>
                 ))}
               </div>

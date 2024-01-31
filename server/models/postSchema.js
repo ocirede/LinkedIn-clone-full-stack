@@ -1,20 +1,20 @@
 import mongoose from "mongoose";
 
+const postSchema = mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
 
-const postSchema = mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
 
     likes: [
       {
@@ -29,6 +29,6 @@ const postSchema = mongoose.Schema({
   }
 );
 
-const Post = mongoose.model("post", postSchema);
+const Post = mongoose.model("Post", postSchema);
 
 export default Post;
