@@ -1,3 +1,5 @@
+
+import Navbar from "./components/Navbar";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
@@ -9,8 +11,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
+
         <UserContextProvider>
           <PostContextProvider>
+   <Navbar/>
             <Routes>
               <Route path="/home" element={<Home />} />
               <Route path="/signin" element={<SignIn />} />
@@ -21,6 +25,5 @@ function App() {
       </BrowserRouter>
     </>
   );
-}
 
 export default App;
