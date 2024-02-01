@@ -26,7 +26,7 @@ const PostContextProvider = ({ children }) => {
     try {
       const response = await axios.post(baseURL + `/posts/add`, formData);
 
-      //window.location.replace("/home");
+      window.location.replace("/home");
 
       console.log("New Post:", response.data);
     } catch (error) {
