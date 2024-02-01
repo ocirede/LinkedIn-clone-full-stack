@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/userContext";
 import { PostContext } from "../context/postContext";
+import { baseURL } from "../config/api";
 
 const Posts = () => {
   const { user } = useContext(UserContext);
@@ -49,15 +50,22 @@ const Posts = () => {
               key={post._id}
               className="w-full bg-white flex flex-col border border-gray-300 rounded-xl p-4"
             >
-              <h3 className="text-lg font-bold">{post.title}</h3>
+              <h3 className="text-lg font-bold">{post.author.username}</h3>
+              <h4 className="text-lg font-bold">Title: {post.title}</h4>
               <p className="mt-2">{post.content}</p>
+              <img
+                src={baseURL + "/uploads/" + post.image}
+                alt="Post Pic"
+                className="w-full rounded-md mb-4"
+              />
               <div className="flex ">
                 <div className="flex items-center justify-between mt-4 w-1/2">
                   <button
                     onClick={() => handleLike(post._id, user._id)}
                     className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
                   >
-                    <i class="fa-regular fa-thumbs-up fa-xl"></i> ({post.likes.length})
+                    <i class="fa-regular fa-thumbs-up fa-xl"></i> (
+                    {post.likes.length})
                   </button>
                   <button
                     onClick={() => handleToggleCommentInput(post._id)}
