@@ -22,7 +22,11 @@ const SignIn = () => {
           className="h-10 "
         />
       </div>
-      <div className="flex justify-center items-center h-screen bg-gray-100 ">
+      <div className="h-screen bg-gray-100 ">
+      <div className="flex justify-center  h-1/2 items-center flex-col">
+      <h1 className="text-3xl font-medium mb-4 pb-5">
+            Make the most of your professional life
+          </h1>
         <div className="max-w-md w-full bg-white shadow-md rounded px-8 py-6 ">
           <h2 className="text-2xl font-bold mb-4">Sign In</h2>
           <p className="text-gray-600 text-sm mb-4">
@@ -80,6 +84,7 @@ const SignIn = () => {
             </div>
           </form>
         </div>
+      </div>
       </div>
     </>
   );
