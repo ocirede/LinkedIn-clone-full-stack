@@ -7,14 +7,15 @@ import postRoutes from "./routes/postRoute.js";
 import cors from "cors";
 import fs from "fs";
 import commentRoutes from "./routes/commentRoute.js";
+
 const uploads = "./uploads";
-if(!fs.existsSync(uploads)){
-  fs.mkdirSync(uploads)
+if (!fs.existsSync(uploads)) {
+  fs.mkdirSync(uploads);
 }
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use("/posts", express.static("uploads/post-image"), postRoutes);
+app.use("/posts", express.static("uploads/postImage"), postRoutes);
 app.use("/comments", commentRoutes);
 app.use("/users", userRoutes);
 app.listen(port, () => {
