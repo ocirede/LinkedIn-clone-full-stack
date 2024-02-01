@@ -44,7 +44,7 @@ const Posts = () => {
   return (
     <div className="w-full mx-auto">
       {user ? (
-        <div className="space-y-4">
+        <div className="space-y-4 mb-10">
           {allPosts?.map((post) => (
             <div
               key={post._id}
