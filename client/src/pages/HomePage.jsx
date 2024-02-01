@@ -6,14 +6,14 @@ export default function HomePage() {
   return (
     <>
     <div className="flex h-screen">
-            <div style={{backgroundColor: "#F4F2EE"}} className=" w-2/6 p-2 flex flex-col items-center">
-            <Sidebar1/>
-            </div>
-            <div style={{backgroundColor: "#F4F2EE"}} className=" w-2/6 p-1 flex flex-col items-center">
+            <div style={{backgroundColor: "#F4F2EE"}} className=" w-1/5 p-2 flex flex-col items-center">
             <Hero/>
             </div>
-            <div style={{backgroundColor: "#F4F2EE"}} className=" w-2/6 p-2 flex flex-col items-center">
-              <Sidebar3/>
+            <div style={{backgroundColor: "#F4F2EE"}} className=" w-3/5 p-1 flex flex-col items-center">
+            <Hero/>
+            </div>
+            <div style={{backgroundColor: "#F4F2EE"}} className=" w-1/5 p-2 flex flex-col items-center">
+              <Sidebar1/>
             </div>
       </div>
     </>
