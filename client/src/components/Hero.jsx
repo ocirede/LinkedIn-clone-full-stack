@@ -7,7 +7,9 @@ const Hero = () => {
       <div className="flex flex-col items-center flex-grow">
         <img
           className="w-24 h-24 object-cover rounded-full mb-4"
+
           src='/public/lachlan-dempsey-6VPEOdpFNAs-unsplash.jpg'
+
           alt="Profile"
         />
         {user?(<div className="text-xl font-bold mb-2">{user.username}</div>):""}
