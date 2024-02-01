@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LogOut } from "lucide-react";
 import {
   Bell,
   Briefcase,
   Home,
-  
   MessageCircleMore,
   Network,
   Search,
 } from "lucide-react";
+import { UserContext } from "@/context/userContext";
 
 const Navbar = () => {
+  const { logout } = useContext(UserContext);
   return (
     <nav className=" bg-white shadow z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,6 +69,14 @@ const Navbar = () => {
               <a href="#" className="text-gray-900 hover:text-gray-500">
                 Notifications
               </a>
+            </div>
+            <div>
+              <LogOut
+                className="cursor-pointer"
+                onClick={() => {
+                  logout();
+                }}
+              />
             </div>
           </div>
         </div>
