@@ -11,8 +11,8 @@ const PostForm = () => {
       {user ? (
         <>
 
-          <div className="w-full">
-            <form onSubmit={handleSubmit} >
+          <div className="w-full mb-10">
+            <form onSubmit={createPost}>
 
               <div className="mb-4">
                 <label
@@ -44,6 +44,7 @@ const PostForm = () => {
                   name="content"
                 ></textarea>
               </div>
+              <div className="flex justify-between w-full">
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
@@ -51,6 +52,7 @@ const PostForm = () => {
                 Post
               </button>
               <input type="file" name="postImage" />
+              </div>
             </form>
           </div>
         </>

@@ -41,13 +41,13 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-md mx-auto">
+    <div className="w-full mx-auto">
       {user ? (
         <div className="space-y-4">
           {allPosts?.map((post) => (
             <div
               key={post._id}
-              className="flex flex-col border border-gray-300 rounded p-4"
+              className="w-full bg-white flex flex-col border border-gray-300 rounded-xl p-4"
             >
               <h3 className="text-lg font-bold">{post.title}</h3>
               <p className="mt-2">{post.content}</p>
@@ -57,13 +57,13 @@ const Posts = () => {
                     onClick={() => handleLike(post._id, user._id)}
                     className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
                   >
-                    Like ({post.likes.length})
+                    <i class="fa-regular fa-thumbs-up fa-xl"></i> ({post.likes.length})
                   </button>
                   <button
                     onClick={() => handleToggleCommentInput(post._id)}
                     className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300"
                   >
-                    Comment
+                    <i class="fa-regular fa-comment fa-xl"></i>
                   </button>
                   <button
                     onClick={() => deletePost(post._id)}
@@ -73,7 +73,7 @@ const Posts = () => {
                     }`}
                     disabled={user._id !== post.author._id}
                   >
-                    Delete
+                    <i class="fa-solid fa-trash fa-xl"></i>
                   </button>
                 </div>
                 <div className="flex justify-end w-1/2">
