@@ -7,9 +7,10 @@ import postRoutes from "./routes/postRoute.js";
 import cors from "cors";
 import fs from "fs";
 import commentRoutes from "./routes/commentRoute.js";
+
 const uploads = "./uploads";
-if(!fs.existsSync(uploads)){
-  fs.mkdirSync(uploads)
+if (!fs.existsSync(uploads)) {
+  fs.mkdirSync(uploads);
 }
 const app = express();
 app.use(express.json());
