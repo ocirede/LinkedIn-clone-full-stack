@@ -8,6 +8,7 @@ import UserContextProvider from "./context/userContext";
 import PostContextProvider from "./context/postContext";
 import HomeLayout from "./layouts/homeLayout";
 import MainLayout from "./layouts/mainLayout";
+import Home from "./pages/Home";
 
 function App() {
   return (
