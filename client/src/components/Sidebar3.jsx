@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
+  //CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -14,8 +14,8 @@ import { Switch } from "@/components/ui/switch"
 
 const notifications = [
   {
-    title: "Your call has been confirmed.",
-    description: "1 hour ago",
+    title: "Tec4med",
+    description: "Transportation/Trucking/Railcard",
   },
   {
     title: "You have a new message!",
@@ -29,26 +29,14 @@ const notifications = [
 
 
 
-export default function Sidebar1({ className, ...props }) {
+export default function Sidebar3({ className, ...props }) {
   return (
     <Card className= {cn("w-[380px] mt-4", className)} {...props}>
       <CardHeader>
-        <CardTitle>Notifications</CardTitle>
-        <CardDescription>You have 3 unread messages.</CardDescription>
+        <CardTitle>Add to your feed </CardTitle>
+        
       </CardHeader>
       <CardContent className="grid gap-4">
-        <div className=" flex items-center space-x-4 rounded-md border p-4">
-          <BellRing />
-          <div className="flex-1 space-y-1">
-            <p className="text-sm font-medium leading-none">
-              Push Notifications
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Send notifications to device.
-            </p>
-          </div>
-          <Switch />
-        </div>
         <div>
           {notifications.map((notification, index) => (
             <div
