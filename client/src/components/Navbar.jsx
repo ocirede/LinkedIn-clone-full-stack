@@ -1,4 +1,5 @@
 import React from "react";
+import {LogOut} from "lucide-react"
 import {
   Bell,
   Briefcase,
@@ -11,7 +12,9 @@ import {
 
 const Navbar = () => {
   return (
-    <nav className="bg-white shadow z-50">
+
+    <nav className=" bg-white shadow z-50">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
@@ -67,6 +70,9 @@ const Navbar = () => {
               <a href="#" className="text-gray-900 hover:text-gray-500">
                 Notifications
               </a>
+            </div>
+            <div>
+              <LogOut/>
             </div>
           </div>
         </div>
