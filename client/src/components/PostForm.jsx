@@ -10,8 +10,10 @@ const PostForm = () => {
     <>
       {user ? (
         <>
-          <div>
-            <form onSubmit={createPost}>
+
+          <div className="w-full">
+            <form onSubmit={handleSubmit} >
+
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -20,10 +22,12 @@ const PostForm = () => {
                   Title:
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline rounded-xl"
                   id="title"
                   type="text"
+                  placeholder="Title"
                   name="title"
+
                 />
               </div>
               <div className="mb-6">
@@ -34,8 +38,9 @@ const PostForm = () => {
                   Content:
                 </label>
                 <textarea
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="content"
+                  placeholder="Start a Post"
                   name="content"
                 ></textarea>
               </div>

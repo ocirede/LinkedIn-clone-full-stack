@@ -1,54 +1,37 @@
-import { BellRing, Check } from "lucide-react"
-
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Switch } from "@/components/ui/switch"
 
 const notifications = [
   {
-    title: "Your call has been confirmed.",
-    description: "1 hour ago",
+    title: "Tec4med",
+    description: "Transportation/Trucking/Railcard",
   },
   {
     title: "You have a new message!",
     description: "1 hour ago",
   },
   {
-    title: "Your subscription is expiring soon!",
-    description: "2 hours ago",
+    title: "Upgrade to Premium",
+    description: "Try it for free",
   },
 ]
 
 
 
-export default function CardDemo({ className, ...props }) {
+export default function Sidebar3({ className, ...props }) {
   return (
-    <Card className={cn("w-1/2", className)} {...props}>
+    <Card className= {cn("w-1/2 mt-4", className)} {...props}>
       <CardHeader>
-        <CardTitle>Notifications</CardTitle>
-        <CardDescription>You have 3 unread messages.</CardDescription>
+        <CardTitle>Add to your feed </CardTitle>
+
       </CardHeader>
       <CardContent className="grid gap-4">
-        <div className=" flex items-center space-x-4 rounded-md border p-4">
-          <BellRing />
-          <div className="flex-1 space-y-1">
-            <p className="text-sm font-medium leading-none">
-              Push Notifications
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Send notifications to device.
-            </p>
-          </div>
-          <Switch />
-        </div>
         <div>
           {notifications.map((notification, index) => (
             <div
@@ -69,9 +52,7 @@ export default function CardDemo({ className, ...props }) {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">
-          <Check className="mr-2 h-4 w-4" /> Mark all as read
-        </Button>
+        
       </CardFooter>
     </Card>
   )
