@@ -16,7 +16,13 @@ const postSchema = mongoose.Schema(
       ref: "User",
     },
 
-    image: String,
+
+    image: {
+      type: String,
+    },
+
+  
+
 
     likes: [
       {

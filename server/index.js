@@ -15,7 +15,7 @@ if (!fs.existsSync(uploads)) {
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use("/posts", express.static("uploads/post-image"), postRoutes);
+app.use("/posts", express.static("uploads/postImage"), postRoutes);
 app.use("/comments", commentRoutes);
 app.use("/users", userRoutes);
 app.listen(port, () => {

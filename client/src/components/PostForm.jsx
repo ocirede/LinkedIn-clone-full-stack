@@ -5,21 +5,13 @@ import { PostContext } from "../context/postContext";
 const PostForm = () => {
   const { user } = useContext(UserContext);
   const { createPost } = useContext(PostContext);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    createPost(title, content);
-    console.log(content, title);
-  };
 
   return (
     <>
       {user ? (
         <>
           <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={createPost}>
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -31,8 +23,7 @@ const PostForm = () => {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="title"
                   type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  name="title"
                 />
               </div>
               <div className="mb-6">
@@ -45,8 +36,7 @@ const PostForm = () => {
                 <textarea
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="content"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
+                  name="content"
                 ></textarea>
               </div>
               <button
@@ -55,6 +45,7 @@ const PostForm = () => {
               >
                 Post
               </button>
+              <input type="file" name="postImage" />
             </form>
           </div>
         </>

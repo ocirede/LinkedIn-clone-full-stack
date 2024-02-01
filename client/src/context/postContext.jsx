@@ -15,20 +15,24 @@ const PostContextProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const createPost = async (title, content) => {
-    try {
-      const response = await axios.post(baseURL + `/posts/add`, {
-        title,
-        content,
-        author: user._id,
-      });
+  const createPost = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", e.target.title.value);
+    formData.append("content", e.target.content.value);
+    formData.append("postImage", e.target.postImage.files[0]);
+    formData.append("author", user._id);
 
-      window.location.replace("/home");
+    try {
+      const response = await axios.post(baseURL + `/posts/add`, formData);
+
+      //window.location.replace("/home");
 
       console.log("New Post:", response.data);
     } catch (error) {
       console.error("Error creating new Post:", error);
     }
+    e.target.reset();
   };
 
   const deletePost = async (postId) => {
