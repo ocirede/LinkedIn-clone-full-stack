@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  //CardDescription,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -14,29 +14,41 @@ import { Switch } from "@/components/ui/switch"
 
 const notifications = [
   {
-    title: "Tec4med",
-    description: "Transportation/Trucking/Railcard",
+    title: "Your call has been confirmed.",
+    description: "1 hour ago",
   },
   {
     title: "You have a new message!",
     description: "1 hour ago",
   },
   {
-    title: "Upgrade to Premium",
-    description: "Try it for free",
+    title: "Your subscription is expiring soon!",
+    description: "2 hours ago",
   },
 ]
 
 
 
-export default function Sidebar3({ className, ...props }) {
+export default function CardDemo({ className, ...props }) {
   return (
-    <Card className= {cn("w-[380px] mt-4", className)} {...props}>
+    <Card className={cn("w-[380px]", className)} {...props}>
       <CardHeader>
-        <CardTitle>Add to your feed </CardTitle>
-        
+        <CardTitle>Notifications</CardTitle>
+        <CardDescription>You have 3 unread messages.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
+        <div className=" flex items-center space-x-4 rounded-md border p-4">
+          <BellRing />
+          <div className="flex-1 space-y-1">
+            <p className="text-sm font-medium leading-none">
+              Push Notifications
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Send notifications to device.
+            </p>
+          </div>
+          <Switch />
+        </div>
         <div>
           {notifications.map((notification, index) => (
             <div

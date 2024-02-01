@@ -1,10 +1,14 @@
 import Post from "../models/postSchema.js";
 
 export const addPost = async (req, res) => {
+  const {title, content, author} = req.body;
   try {
+
     if (req.file) req.body.image = req.file.filename;
     console.log("Add post here", req.body);
     const newPost = new Post(req.body);
+
+   
     await newPost.save();
     await newPost.populate("author");
     res.json(newPost);
