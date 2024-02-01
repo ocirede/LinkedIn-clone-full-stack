@@ -17,11 +17,11 @@ function App() {
           <PostContextProvider>
             <Routes>
               <Route element={<HomeLayout />}>
-              <Route path="/home" element={<HomePage />} />
+                <Route path="/home" element={<HomePage />} />
               </Route>
               <Route element={<MainLayout />}>
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/" element={<SignUp />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/" element={<SignUp />} />
               </Route>
             </Routes>
           </PostContextProvider>
