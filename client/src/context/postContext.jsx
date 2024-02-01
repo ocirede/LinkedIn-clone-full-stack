@@ -9,31 +9,21 @@ export const PostContext = createContext();
 
 const PostContextProvider = ({ children }) => {
   const [allPosts, setAllPosts] = useState();
-  const [updatedPost, setUpdatedPost] = useState();
-  const [selectedPost, setSelectedPost] = useState();
+  const [comments, setAllComments] = useState();
 
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  const createPost = async (
-    title,
-    content,
-    priority,
-    completed,
-    selectedUser
-  ) => {
+  const createPost = async (title, content) => {
     try {
-      const response = await axios.post(baseURL + `/posts/createpost`, {
+      const response = await axios.post(baseURL + `/posts/add`, {
         title,
         content,
-        priority,
-        completed,
-        selectedUser,
         author: user._id,
       });
 
-      navigate("/home");
+      window.location.replace("/home");
 
       console.log("New Post:", response.data);
     } catch (error) {
@@ -43,67 +33,90 @@ const PostContextProvider = ({ children }) => {
 
   const deletePost = async (postId) => {
     try {
-      const response = await axios.delete(
-        baseURL + `/todos/deletetodo/${postId}`
-      );
-      console.log("Post deleted:", response.data.post);
+      const response = await axios.delete(baseURL + `/posts/delete/${postId}`);
+      window.location.replace("/home");
+      console.log("Post deleted:", response.data.message);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const editPost = async (postId, updatedData) => {
+  const handleLike = async (postId, userId) => {
     try {
       const response = await axios.put(
-        baseURL + `/posts/editpost/${postId}`,
-        updatedData
+        baseURL + `/posts/like/${postId}/${userId} `
       );
-
-      if (response.data.success) {
-        setUpdatedPost(response.data.todo);
-
-        navigate("/home");
-        console.log("Post updated successfully!", response.data.post);
-      }
+      console.log(response.data);
+      const newPosts = allPosts.map((post) => {
+        if (post._id === postId) {
+          return response.data;
+        } else {
+          return post;
+        }
+      });
+      setAllPosts(newPosts);
     } catch (error) {
-      console.error("Error editing the post", error);
-    }
-  };
-
-  const findPost = async (postId) => {
-    try {
-      const response = await axios.get(baseURL + `/posts/${postId}`);
-
-      if (response.data.success) {
-        setSelectedPost(response.data.todo);
-        console.log("Post found successfully!", response.data.todo);
-      }
-    } catch (error) {
-      console.error("Error finding the post", error);
+      console.error("Error liking the post", error);
     }
   };
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        //const response = await axios.get(baseURL + `/todos/fetchtodos`);
-        // setAllTasks(response.data.posts);
-        // console.log("fetch all posts context", response.data.posts);
+        const response = await axios.get(baseURL + `/posts/get`);
+
+        setAllPosts(response.data);
+        console.log("fetch all posts context:", response.data);
       } catch (error) {
         console.error("Error fetching the posts", error);
       }
     };
 
     fetchPosts();
-  }, [setUpdatedPost]);
+  }, []);
+
+  const createComment = async (content, postId, userId) => {
+    try {
+      const response = await axios.post(
+        baseURL + `/comments/add/${postId}/${userId}`,
+        {
+          content,
+          author: userId,
+          post: postId,
+        }
+      );
+
+      window.location.replace("/home");
+
+      console.log("New Comment:", response.data);
+    } catch (error) {
+      console.error("Error creating new Comment:", error);
+    }
+  };
+
+  const fetchComments = async (postId) => {
+    try {
+      const response = await axios.get(baseURL + `/comments/get/${postId}`);
+      setAllComments(response.data);
+
+      console.log("fetch all comments", response.data);
+    } catch (error) {
+      console.error("Error fetching the comments", error);
+    }
+  };
+
+  //fetchComments();
 
   return (
     <PostContext.Provider
       value={{
+        allPosts,
+        comments,
+        handleLike,
         createPost,
         deletePost,
-        editPost,
-        findPost,
+        createComment,
+        fetchComments,
       }}
     >
       {children}
