@@ -27,7 +27,7 @@ const Posts = () => {
 
   const handleCommentSubmit = async (postId, userId) => {
     createComment(commentText, postId, userId);
-    console.log("=====>",userId)
+    console.log("=====>", userId);
     console.log("Comment submit:", postId, userId, commentText);
     handleToggleCommentInput(postId);
     setCommentText("");
@@ -116,19 +116,16 @@ const Posts = () => {
               )}
               {selectedPostId === post._id && comments && (
                 <div className="mt-4">
-
                   {comments.map((comment, index) => (
                     <div
                       key={index}
                       className="bg-gray-100 border border-gray-300 rounded p-2"
                     >
-                      <div className=" flex flex-col">
-                        <div className=" flex gap-2">
-                        <CircleUserRound />
-                        {comment.author.username}
-
+                      <div className=" flex gap-2 ">
+                        <div className=" flex gap-2 ">
+                          <CircleUserRound />
+                          {comment.author.username}:
                         </div>
-                       
 
                         <p>{comment.content}</p>
                       </div>
