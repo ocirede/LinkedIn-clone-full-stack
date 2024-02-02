@@ -85,8 +85,9 @@ const PostContextProvider = ({ children }) => {
         baseURL + `/comments/add/${postId}/${userId}`,
         {
           content,
-          author: userId,
           post: postId,
+          author: userId,
+        
         }
       );
 

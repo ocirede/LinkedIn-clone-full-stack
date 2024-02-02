@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/userContext";
 import { PostContext } from "../context/postContext";
 import { baseURL } from "../config/api";
-
+import { CircleUserRound } from "lucide-react";
 const Posts = () => {
   const { user } = useContext(UserContext);
   const {
@@ -13,6 +13,7 @@ const Posts = () => {
     fetchComments,
     comments,
   } = useContext(PostContext);
+
   const [commentText, setCommentText] = useState("");
   const [showCommentInput, setShowCommentInput] = useState({});
   const [selectedPostId, setSelectedPostId] = useState(null);
@@ -26,6 +27,7 @@ const Posts = () => {
 
   const handleCommentSubmit = async (postId, userId) => {
     createComment(commentText, postId, userId);
+    console.log("=====>",userId)
     console.log("Comment submit:", postId, userId, commentText);
     handleToggleCommentInput(postId);
     setCommentText("");
@@ -64,14 +66,14 @@ const Posts = () => {
                     onClick={() => handleLike(post._id, user._id)}
                     className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
                   >
-                    <i class="fa-regular fa-thumbs-up fa-xl"></i> (
+                    <i className="fa-regular fa-thumbs-up fa-xl"></i> (
                     {post.likes.length})
                   </button>
                   <button
                     onClick={() => handleToggleCommentInput(post._id)}
                     className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300"
                   >
-                    <i class="fa-regular fa-comment fa-xl"></i>
+                    <i className="fa-regular fa-comment fa-xl"></i>
                   </button>
                   <button
                     onClick={() => deletePost(post._id)}
@@ -81,7 +83,7 @@ const Posts = () => {
                     }`}
                     disabled={user._id !== post.author._id}
                   >
-                    <i class="fa-solid fa-trash fa-xl"></i>
+                    <i className="fa-solid fa-trash fa-xl"></i>
                   </button>
                 </div>
                 <div className="flex justify-end w-1/2">
@@ -114,12 +116,22 @@ const Posts = () => {
               )}
               {selectedPostId === post._id && comments && (
                 <div className="mt-4">
+
                   {comments.map((comment, index) => (
                     <div
                       key={index}
                       className="bg-gray-100 border border-gray-300 rounded p-2"
                     >
-                      <p>{comment.content}</p>
+                      <div className=" flex flex-col">
+                        <div className=" flex gap-2">
+                        <CircleUserRound />
+                        {comment.author.username}
+
+                        </div>
+                       
+
+                        <p>{comment.content}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
